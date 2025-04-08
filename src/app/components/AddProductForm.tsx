@@ -2,7 +2,19 @@
 
 import { useState } from "react";
 
-export default function AddProductForm() {
+// Define product type
+interface Product {
+  id: number;
+  userId: number;
+  title: string;
+  body: string;
+}
+
+interface AddProductFormProps {
+  onAddProduct: (product: Product) => void;
+}
+
+export default function AddProductForm({ onAddProduct }: AddProductFormProps) {
   const [formData, setFormData] = useState({
     title: "",
     body: "",
@@ -78,6 +90,15 @@ export default function AddProductForm() {
 
       const data = await response.json();
       console.log("Success:", data);
+
+      // Create a new product with the response data and a timestamp to ensure uniqueness
+      const newProduct: Product = {
+        ...data,
+        id: data.id || Date.now(), // Use the API-provided ID or fallback to timestamp
+      };
+
+      // Pass the new product to the parent component
+      onAddProduct(newProduct);
 
       // Reset form
       setFormData({
