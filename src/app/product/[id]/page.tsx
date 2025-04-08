@@ -3,6 +3,15 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -56,104 +65,110 @@ export default function ProductDetail() {
   if (!product) {
     return (
       <div className="container mx-auto p-4">
-        <div className="text-center py-20">
-          <div className="text-xl">Product not found</div>
-          <Link
-            href="/"
-            className="mt-4 inline-block text-blue-500 hover:underline"
-          >
-            Back to Products
-          </Link>
-        </div>
+        <Card className="text-center py-12">
+          <CardContent>
+            <div className="text-xl mb-4">Product not found</div>
+            <Button variant="outline" asChild>
+              <Link href="/">Back to Products</Link>
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
 
   return (
     <div className="container mx-auto p-4">
-      <Link
-        href="/"
-        className="text-blue-500 hover:underline mb-6 inline-block"
-      >
-        &larr; Back to Products
-      </Link>
+      <div className="mb-6">
+        <Button variant="ghost" asChild className="pl-0">
+          <Link href="/">
+            <span className="mr-2">&larr;</span> Back to Products
+          </Link>
+        </Button>
+      </div>
 
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <Card className="overflow-hidden">
         <div className="md:flex">
           <div className="md:w-1/2">
             <img
               src={`https://picsum.photos/id/${Number(id) % 100}/600/600`}
               alt={product.title}
-              className="w-full h-auto"
+              className="w-40"
             />
           </div>
 
-          <div className="md:w-1/2 p-8">
-            <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
-              Category {product.userId}
-            </div>
-            <h1 className="text-3xl font-bold mt-2">{product.title}</h1>
-
-            <div className="mt-4 flex items-center">
-              <span className="text-2xl font-bold">${price}</span>
-              <span
-                className={`ml-4 px-2 py-1 text-sm rounded ${
-                  stockStatus === "In Stock"
-                    ? "bg-green-100 text-green-800"
-                    : stockStatus === "Low Stock"
-                    ? "bg-yellow-100 text-yellow-800"
-                    : "bg-red-100 text-red-800"
-                }`}
-              >
-                {stockStatus}
-              </span>
-            </div>
-
-            {stockQuantity > 0 && (
-              <div className="text-sm text-gray-600 mt-1">
-                {stockQuantity} units available
+          <div className="md:w-1/2">
+            <CardHeader>
+              <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
+                Category {product.userId}
               </div>
-            )}
+              <CardTitle className="text-3xl">{product.title}</CardTitle>
 
-            <div className="mt-6">
-              <h2 className="text-xl font-semibold">Product Description</h2>
-              <p className="mt-2 text-gray-600">{product.body}</p>
-            </div>
+              <div className="flex items-center mt-2">
+                <span className="text-2xl font-bold">${price}</span>
+                <span
+                  className={`ml-4 px-2 py-1 text-sm rounded ${
+                    stockStatus === "In Stock"
+                      ? "bg-green-100 text-green-800"
+                      : stockStatus === "Low Stock"
+                      ? "bg-yellow-100 text-yellow-800"
+                      : "bg-red-100 text-red-800"
+                  }`}
+                >
+                  {stockStatus}
+                </span>
+              </div>
 
-            <div className="mt-8">
-              <h2 className="text-xl font-semibold">Product Details</h2>
-              <div className="mt-2 grid grid-cols-2 gap-4">
-                <div>
-                  <div className="text-sm text-gray-500">Product ID</div>
-                  <div>{product.id}</div>
+              {stockQuantity > 0 && (
+                <div className="text-sm text-gray-600 mt-1">
+                  {stockQuantity} units available
                 </div>
-                <div>
-                  <div className="text-sm text-gray-500">Category ID</div>
-                  <div>{product.userId}</div>
-                </div>
-                <div>
-                  <div className="text-sm text-gray-500">Weight</div>
-                  <div>{(Math.random() * 2 + 0.5).toFixed(2)} kg</div>
-                </div>
-                <div>
-                  <div className="text-sm text-gray-500">Dimensions</div>
+              )}
+            </CardHeader>
+
+            <CardContent className="space-y-6">
+              <div>
+                <h2 className="text-xl font-semibold mb-2">
+                  Product Description
+                </h2>
+                <CardDescription className="text-gray-600 text-base">
+                  {product.body}
+                </CardDescription>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Product Details</h2>
+                <div className="grid grid-cols-2 gap-4">
                   <div>
-                    {Math.floor(Math.random() * 10 + 10)} ×
-                    {Math.floor(Math.random() * 10 + 10)} ×
-                    {Math.floor(Math.random() * 5 + 2)} cm
+                    <div className="text-sm text-gray-500">Product ID</div>
+                    <div>{product.id}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-gray-500">Category ID</div>
+                    <div>{product.userId}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-gray-500">Weight</div>
+                    <div>{(Math.random() * 2 + 0.5).toFixed(2)} kg</div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-gray-500">Dimensions</div>
+                    <div>
+                      {Math.floor(Math.random() * 10 + 10)} ×
+                      {Math.floor(Math.random() * 10 + 10)} ×
+                      {Math.floor(Math.random() * 5 + 2)} cm
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </CardContent>
 
-            <div className="mt-10">
-              <button className="bg-indigo-600 text-white py-3 px-6 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors w-full">
-                Add to Cart
-              </button>
-            </div>
+            <CardFooter className="mt-4">
+              <Button className="w-full">Add to Cart</Button>
+            </CardFooter>
           </div>
         </div>
-      </div>
+      </Card>
     </div>
   );
 }
