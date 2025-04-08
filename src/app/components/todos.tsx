@@ -2,6 +2,15 @@
 // Client component to handle the fetch operation
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 
 interface FetchTodoProps {
   searchTerm: string;
@@ -41,37 +50,43 @@ function FetchTodo({ searchTerm }: FetchTodoProps) {
   });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+    <div className="flex gap-2 p-4">
       {filteredProducts.length > 0 ? (
         filteredProducts.map((product: any) => (
           <Link
             key={product.id}
             href={`/product/${product.id}`}
-            className="block h-full transition-transform hover:scale-105"
+            className="w-[calc(50%-0.25rem)] sm:w-[calc(33.333%-0.5rem)] lg:w-[calc(20%-0.5rem)] transition-transform hover:scale-105"
           >
-            <div className="border p-4 rounded shadow h-full cursor-pointer hover:shadow-md transition-shadow">
-              <div className="mb-2">
+            <Card className="w-12 border shadow-sm">
+              <div className="w-12 h-12 overflow-hidden">
                 <img
                   src={`https://picsum.photos/id/${product.id % 100}/200/200`}
                   alt={product.title}
-                  className="w-full h-40 object-cover rounded"
+                  className=" object-cover"
                 />
               </div>
-              <h3 className="font-bold">Product ID: {product.id}</h3>
-              <h3 className="text-sm text-gray-500">
-                Category ID: {product.userId}
-              </h3>
-              <h3 className="text-lg font-semibold mt-2 line-clamp-1">
-                {product.title}
-              </h3>
-              <p className="mt-2 text-sm text-gray-700 line-clamp-2">
-                {product.body}
-              </p>
-            </div>
+              <CardHeader className="p-2 pb-0 space-y-0">
+                <CardTitle className="text-xs text-blue-500">
+                  {product.id}
+                </CardTitle>
+                <CardDescription className="text-[10px] text-gray-500">
+                  Category ID: {product.userId}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-2 pt-1">
+                <h3 className="text-xs font-medium line-clamp-1">
+                  {product.title}
+                </h3>
+                <p className="mt-0.5 text-[10px] text-gray-700 line-clamp-1">
+                  {product.body}
+                </p>
+              </CardContent>
+            </Card>
           </Link>
         ))
       ) : (
-        <div className="col-span-full text-center py-8">
+        <div className="w-full text-center py-4">
           {todo.length === 0
             ? "Loading products..."
             : `No products found matching "${searchTerm}"`}
