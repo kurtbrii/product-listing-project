@@ -50,38 +50,35 @@ function FetchTodo({ searchTerm }: FetchTodoProps) {
   });
 
   return (
-    <div className="flex gap-2 p-4">
+    <div className="flex flex-wrap gap-5 p-4">
       {filteredProducts.length > 0 ? (
         filteredProducts.map((product: any) => (
           <Link
             key={product.id}
             href={`/product/${product.id}`}
-            className="w-[calc(50%-0.25rem)] sm:w-[calc(33.333%-0.5rem)] lg:w-[calc(20%-0.5rem)] transition-transform hover:scale-105"
+            className="w-[260px] transition-transform hover:scale-105"
           >
-            <Card className="w-12 border shadow-sm">
-              <div className="w-12 h-12 overflow-hidden">
-                <img
-                  src={`https://picsum.photos/id/${product.id % 100}/200/200`}
-                  alt={product.title}
-                  className=" object-cover"
-                />
+            <Card className="bg-white overflow-hidden border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-200">
+              <div className="flex items-start p-4">
+                <div className="w-12 h-12 overflow-hidden flex-shrink-0 mr-3 rounded-lg bg-blue-50">
+                  <img
+                    src={`https://picsum.photos/id/${product.id % 100}/100/100`}
+                    alt={product.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-blue-600 font-bold uppercase text-sm tracking-tight mb-1 truncate">
+                    {product.title.split(" ").slice(0, 2).join(" ")}
+                  </h3>
+                  <p className="text-xs text-gray-600 mb-1">
+                    product-{product.id}@example.com
+                  </p>
+                  <p className="text-xs font-medium text-gray-500">
+                    {(product.id * 10000000000).toString().substring(0, 10)}
+                  </p>
+                </div>
               </div>
-              <CardHeader className="p-2 pb-0 space-y-0">
-                <CardTitle className="text-xs text-blue-500">
-                  {product.id}
-                </CardTitle>
-                <CardDescription className="text-[10px] text-gray-500">
-                  Category ID: {product.userId}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="p-2 pt-1">
-                <h3 className="text-xs font-medium line-clamp-1">
-                  {product.title}
-                </h3>
-                <p className="mt-0.5 text-[10px] text-gray-700 line-clamp-1">
-                  {product.body}
-                </p>
-              </CardContent>
             </Card>
           </Link>
         ))

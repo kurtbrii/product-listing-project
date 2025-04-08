@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Product Inventory Dashboard
 
-## Getting Started
+A responsive web application for managing product inventory, built with Next.js, Tailwind CSS, and shadcn/ui components.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Product listing with search functionality
+- Product detail pages
+- Add new products with form validation
+- Responsive design for mobile and desktop
+- Modern UI using shadcn/ui components
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/kurtbrii/product-listing-project
+   cd product_listing
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How It Works
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Product Listing**: The homepage displays all products with search functionality to filter by title or ID.
+- **Product Details**: Click on any product to view detailed information on a dedicated page.
+- **Add Product**: Click the "Add New Product" button to display a form where you can add new products to the inventory.
+- **Data Source**: The application uses the JSONPlaceholder API to fetch mock product data.
 
-## Deploy on Vercel
+## Technology Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Framework**: Next.js 15 with App Router
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui (utilizing Radix UI primitives)
+- **Form Handling**: React Hook Form with Zod validation
+- **State Management**: React useState for local state management
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## shadcn/ui Integration
+
+This project uses several shadcn/ui components for a consistent and accessible UI:
+
+- **Button**: Used for actions throughout the app
+- **Card**: For displaying product information
+- **Form components**: Form, FormField, FormItem, FormLabel, etc.
+- **Label**: For form labels
+- **Input**: For text input fields
+
+The shadcn/ui components are configured in `components.json` and follow the project's theming system defined in the Tailwind configuration.
+
+## License
+
+MIT 
